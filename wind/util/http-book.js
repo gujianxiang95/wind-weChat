@@ -6,9 +6,8 @@ const tips = {
 }
 class HTTP{
   request(url,data={},method="GET"){
-    return new Promise((resolve)=>{
+    return new Promise((resolve, reject)=>{
       this._request(url, resolve, reject, data , method )
-    },(reject)=>{
     })
   }
   _request(url,resolve,reject, data = {}, method = "GET"){
