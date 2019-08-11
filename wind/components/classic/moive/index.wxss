@@ -1,0 +1,21 @@
+/* components/classic/moive/index.wxss */
+@import "../common.wxss";
+
+
+.classic-img{
+  width: 750rpx;
+  height: 500rpx;
+}
+
+.tag{
+  width: 46px;
+  height: 142px;
+  position: relative;
+  right: 310rpx;
+  bottom:110rpx;
+}
+
+.content{
+  font-size: 36rpx;
+  max-width: 550px;
+}

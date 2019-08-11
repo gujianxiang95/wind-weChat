@@ -1,0 +1,7 @@
+<!--components/moive/index.wxml-->
+<view hidden="{{hidden}}" class="classic_container">
+  <image class="classic-img" src="{{img}}"></image>
+  <image class="tag" src="./img/moive@tag.png"></image>
+ 
+  <text class="content">{{content}}</text>
+</view> 
