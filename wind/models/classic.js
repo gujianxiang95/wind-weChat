@@ -1,7 +1,7 @@
 import { HTTP } from "../util/http.js"
 class ClassicModel extends HTTP {
 
-
+  //获取最新期刊
   getLateList(sCallback){
     this.request({
       url:'/classic/latest',

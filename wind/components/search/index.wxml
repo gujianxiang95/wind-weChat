@@ -1,0 +1,39 @@
+<!--components/search/index.wxml-->
+<view class="container">
+  <view class="header">
+    <view class="search-container">
+      <image class="icon" src="img/search.png"></image>
+      <input value="{{q}}"  placeholder-class="in-bar" placeholder="书籍名称" class="bar" auto-focus="true" bind:confirm="onConfirm"></input>
+      <image bindtap="onDelete" class="cancel-img" src="img/cancel.png"></image>
+    </view>
+    <view class="cancel" bindtap="onCancel" >取消</view>
+  </view>
+
+  <view wx:if="{{!searching}}">
+    <view class="history">
+      <view class="title">
+        <view class="chunk"></view>
+        <text class="">历史搜索</text>
+        <view class="tags">
+            <v-tag class="vTag" bind:tapping='onConfirm'  wx:for="{{historyWords}}" wx:key="index" text="{{item}}" />
+        </view>
+      </view>
+      <view class="history hot-search">
+        <view class="title">
+          <view class="chunk"></view>
+          <text>热门搜索</text>
+          <view class="tags">
+            <v-tag class="vTag" bind:tapping='onConfirm'  wx:for="{{hotWords}}" wx:key="index" text="{{item}}" />
+        </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{searching}}" class="books-container">
+      <!-- <v-book book="{{dataArray}}" class="book"></v-book> -->
+      <block wx:for="{{dataArray}}" wx:key="{{item.id}}">
+        <v-book book="{{item}}" class="book"></v-book>
+      </block>
+  </view>
+</view>

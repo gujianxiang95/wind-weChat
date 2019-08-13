@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    comments:[],
+    comments:[],//短评数据
     book:null,
     likeStatus:false,
     likeCount:0,
@@ -19,32 +19,44 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: 'Loading',
+    })
     //请求接口，获取初始化数据
     const id = options.bid
     const detail = bookModel.getDetail(id)
     const comments = bookModel.getComments(id)
     const likeStatus = bookModel.getLikeStatus(id)
+    //合并promise请求
+    Promise.all([detail, comments, likeStatus]).then(res=>{
+      console.log(res)
+      this.setData({
+        book:res[0].data.data[0],
+        likeStatus: res[0].data.data[0].like_status,
+        comments: res[1].data.data.comment,
+        likeCount: res[2].data.data[0].fav_nums,
 
-    detail.then(res => {
-      this.setData({
-        book:res.data.data[0]
       })
-      console.log(res.data.data[0])
-    })
-    comments.then(res => {
-      this.setData({
-        comments: res.data.data.comment
-      })
-      console.log(res.data.data.comment)
+      wx.hideLoading()
     })
 
-    likeStatus.then(res => {
-      this.setData({
-        likeStatus: res.data.data[0].like_status,
-        likeCount: res.data.data[0].fav_nums,
-      })
-      console.log(res.data.data[0])
-    })
+    // detail.then(res => {
+    //   this.setData({
+    //     book:res.data.data[0]
+    //   })
+    // })
+    // comments.then(res => {
+    //   this.setData({
+    //     comments: res.data.data.comment
+    //   })
+    // })
+    // likeStatus.then(res => {
+    //   this.setData({
+    //     likeStatus: res.data.data[0].like_status,
+    //     likeCount: res.data.data[0].fav_nums,
+    //   })
+    // })
+
   },
   onLike(e){
     const like_or_cancel = e.detail.behavior
@@ -63,9 +75,41 @@ Page({
     this.setData({
       posting: false
     })
-    
-
   },
+  //接收短评
+  onPost(e){
+    const comment = e.detail.text || e.detail.value
+    // const commentInput = e.detail.value
+    if (comment){
+      return
+    }
+    if (comment.length>50){
+      wx.showToast({
+        title: '短评最多50个字',
+        icon:'none'
+      })
+      return
+    }
+    const addComment = bookModel.postComment(this.data.book.id, comment)
+    addComment.then((res)=>{
+      wx.showToast({
+        title: '+1',
+        icon:'none'
+      })
+      //保证新增短评添加到数组首位
+      this.data.comments.unshift({
+        content:comment,
+        nums:1
+      })
+      console.log(this.data.comments)
+      //增加数据后更新显示数据,关闭蒙层
+      this.setData({
+        comments:this.data.comments,
+        posting:false
+      })
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -195,3 +195,6 @@
   width: 690rpx;
   padding: 0 30rpx;
 }
+.shadow{
+  color: #999;
+}

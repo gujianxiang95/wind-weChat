@@ -3,6 +3,28 @@ import {
 } from '../util/http-book.js'
 
 export class BookModel extends HTTP{
+  //增加短评
+  postComment(bid,comment){
+    return this.request(
+      "/book/add/short_comment",
+      {
+        book_id:bid,
+        content:comment
+      },
+      "POST",
+    )
+  }
+  //
+  search(start,q){
+    return this.request(
+      '/book/search',
+      {
+        q:q,
+        start:start
+      }
+    )
+  }
+
   getHotList(){
     return this.request('/classic/hot_list')
   }
