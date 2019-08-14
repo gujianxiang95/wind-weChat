@@ -1,43 +1,54 @@
-// pages/book/book.js
-import { BookModel } from '../../models/book.js'
-import { random } from '../../util/common.js'
-
-const bookModel = new BookModel()
-
+// pages/my/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    books:[],
-    searching:false,
-    more:'',//加载更多
+
   },
-  //显示隐藏搜索
-  onSearching(e){
-    this.setData({
-      searching:true
+  //获取用户信息
+  getUserInfo(e){
+    if(e.detail.errMsg){
+
+    }
+  },
+  //判断用户是否授权
+  userAuthorized() {
+    wx.getSetting({
+      success: data => {
+        if (data.authSetting['scope.userInfo']){
+          wx.getUserInfo({
+            success: data => {
+              console.log(data)
+            },
+          })
+        }else{
+          console.log('err')
+        }
+      }
     })
   },
-  onCancel(){
-    this.setData({
-      searching: false
-    })
+  ///////
+  onGetUserInfo(e){
+    const userInfo = e.detail.userInfo
+    console.log(userInfo)
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const hotList = bookModel.getHotList()
-    hotList.then((res)=>{
-      // console.log(res.data.data)
-      this.setData({
-        books: res.data.data
-      })
-      // console.log(this.data.books)
-    })
+    this.userAuthorized()
+    
+  //  wx.getUserInfo({
+  //    success:data=>{
+  //      console.log(data)
+  //    },
+  //    fail:data=>{
+
+  //    }
+  //  })
   },
 
   /**
@@ -79,9 +90,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.setData({
-      more: random(16)
-    })
+
   },
 
   /**

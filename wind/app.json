@@ -3,7 +3,8 @@
     "pages/classic/classic",
     "pages/book/book",
     "components/book/index",
-    "pages/book-detail/book-detail"
+    "pages/book-detail/book-detail",
+    "pages/my/index"
   ],
   "requiredBackgroundModes": [
     "audio",
@@ -34,7 +35,7 @@
         "text": "书单"
       },
       {
-        "pagePath": "pages/classic/classic",
+        "pagePath": "pages/my/index",
         "selectedIconPath": "/img/tab/my@highlight.png",
         "iconPath": "/img/tab/my.png",
         "text": "喜欢"

@@ -1,0 +1,22 @@
+<!--pages/my/index.wxml-->
+<view class="container">
+  <image src="/img/my/my@bg.png" class="bg"></image>
+  <!-- <open-data  type="userAvatarUrl" class="avatar avatar-position" ></open-data> -->
+  <!-- <open-data  type="userNickName" ></open-data> -->
+  <v-button open-type="getUserInfo" bind:userInfo="onGetUserInfo" class=" avatar-position"> 
+    <image slot="img" class="avatar" user src="/img/my/my.png"></image>
+  </v-button>
+  <view class="about-container">
+    <view class="about-us">
+      <image src="/img/my/about.png" />
+      <text class="description">关于我们</text>
+    </view>
+    <view class="about-us">
+      <image src="/img/my/about.png" />
+      <text class="description">喜欢的书</text>
+    </view>
+  </view>
+
+  <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" >授权</button> -->
+</view>
+
