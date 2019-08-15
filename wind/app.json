@@ -4,7 +4,8 @@
     "pages/book/book",
     "components/book/index",
     "pages/book-detail/book-detail",
-    "pages/my/index"
+    "pages/my/index",
+    "pages/about/index"
   ],
   "requiredBackgroundModes": [
     "audio",

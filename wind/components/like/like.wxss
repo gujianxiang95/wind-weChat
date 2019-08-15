@@ -1,7 +1,7 @@
 /* components/like/like.wxss */
 .container{
   display:inline-flex;
-  width: 100rpx;
+  width: 60rpx;
   padding-top:10rpx; 
 }
 

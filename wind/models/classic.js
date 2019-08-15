@@ -11,6 +11,15 @@ class ClassicModel extends HTTP {
       }
     })
   }
+  //
+  getMyfavor(sCallback) {
+    this.request({
+      url:"/classic/favor",
+      success:res=>{
+        sCallback(res)
+      }
+    })
+  }
   //根据前进后退获取数据
   getClassic(index, nextOrPre, sCallback){
     //缓存中寻找 or API
@@ -61,6 +70,7 @@ class ClassicModel extends HTTP {
     let key = 'classic_'+index
     return key
   }
+  
 }
 
 export { ClassicModel }

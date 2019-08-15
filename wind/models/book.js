@@ -41,4 +41,7 @@ export class BookModel extends HTTP{
   getComments(bid) {
     return this.request(`/book/${bid}/short_comment`)
   }
+  getMyBookCount(){
+    return this.request(`/book/favor/count`)
+  }
 }
